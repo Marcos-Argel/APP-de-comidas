@@ -84,17 +84,19 @@ class RestaurantCard extends StatelessWidget {
                     style: const TextStyle(color: AppColors.muted),
                   ),
                   const SizedBox(height: 8),
-                  Row(
+                  // Wrap: si no cabe en una línea (celulares pequeños), baja a la siguiente.
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 4,
                     children: [
-                      const Icon(Icons.schedule, size: 16, color: AppColors.muted),
-                      const SizedBox(width: 4),
-                      Text('${restaurant.deliveryMinutes} min',
-                          style: const TextStyle(color: AppColors.muted)),
-                      const SizedBox(width: 16),
-                      const Icon(Icons.delivery_dining, size: 18, color: AppColors.muted),
-                      const SizedBox(width: 4),
-                      Text('Domicilio ${formatPrice(restaurant.deliveryFee)}',
-                          style: const TextStyle(color: AppColors.muted)),
+                      _InfoChip(
+                        icon: Icons.schedule,
+                        text: '${restaurant.deliveryMinutes} min',
+                      ),
+                      _InfoChip(
+                        icon: Icons.delivery_dining,
+                        text: 'Domicilio ${formatPrice(restaurant.deliveryFee)}',
+                      ),
                     ],
                   ),
                 ],
@@ -103,6 +105,26 @@ class RestaurantCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Ícono pequeño con un texto gris (tiempo de entrega, domicilio).
+class _InfoChip extends StatelessWidget {
+  const _InfoChip({required this.icon, required this.text});
+
+  final IconData icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 16, color: AppColors.muted),
+        const SizedBox(width: 4),
+        Text(text, style: const TextStyle(color: AppColors.muted)),
+      ],
     );
   }
 }
