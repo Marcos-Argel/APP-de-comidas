@@ -5,6 +5,9 @@ name: Generar carpetas android y web
 
 on:
   workflow_dispatch:
+  push:
+    branches: [marcos]
+    paths: ['.github/workflows/generar-plataformas.yml']
 
 permissions:
   contents: write
