@@ -60,7 +60,7 @@ APP-de-comidas/
 │       ├── restaurant/          # Juan Parra
 │       ├── cart/                # Juan Padilla
 │       ├── checkout/            # Juan Padilla
-│       └── profile/             # Marcos (pedidos y favoritos)
+│       └── profile/             # Luis (pedidos y favoritos)
 ├── test/
 ├── pubspec.yaml                 # Dependencias
 └── README.md
@@ -70,14 +70,19 @@ APP-de-comidas/
 
 | Integrante | Rama | Tarea | Fecha |
 | --- | --- | --- | --- |
-| Luis Vergara | `luis` | Proyecto base: `flutter create`, tema, rutas, modelos, datos de ejemplo y widgets compartidos (#1) | 13 nov |
-| Santiago Cogollo | `santiago` | Pantalla de Inicio: lista de restaurantes, buscador y filtro (#2) | 20 nov |
-| Juan Pablo Parra | `juan-parra` | Pantalla de Restaurante y menú de platos (#3) | 20 nov |
-| Juan Pablo Padilla | `juan-padilla` | Carrito y pedido por WhatsApp (#4) | 24 nov |
-| Marcos Argel | `marcos` | Perfil: mis pedidos y favoritos (#5) — líder | 24 nov |
-| Marcos Argel | `marcos` | Revisión final, APK de Android y web publicada (#6) | 1 dic |
+| Marcos Argel | `marcos` | **1.** Proyecto base: `flutter create`, tema, rutas, modelos, datos de ejemplo y widgets compartidos (#1) — líder | 11 nov |
+| Santiago Cogollo | `santiago` | **2.** Pantalla de Inicio: lista de restaurantes, buscador y filtro (#2) | 20 nov |
+| Juan Pablo Parra | `juan-parra` | **2.** Pantalla de Restaurante y menú de platos (#3) | 20 nov |
+| Juan Pablo Padilla | `juan-padilla` | **3.** Carrito y pedido por WhatsApp (#4) | 24 nov |
+| Luis Vergara | `luis` | **3.** Perfil: mis pedidos y favoritos (#5) | 24 nov |
+| Marcos Argel | `marcos` | **4.** Revisión final, APK de Android y web publicada (#6) | 1 dic |
 
-**Orden de trabajo:** Luis va primero, porque las demás pantallas usan sus modelos, datos y widgets. Mientras tanto, cada uno puede ir diseñando su pantalla.
+**Orden de trabajo:**
+1. **Marcos sube primero la estructura base** (#1). Las demás pantallas usan sus modelos, datos y widgets.
+2. Cuando la estructura entre a `main`, cada uno actualiza su rama (`git checkout SU_RAMA` y `git pull origin main`) y hace su pantalla: primero Inicio y Restaurante, después Carrito y Perfil.
+3. Al final, Marcos revisa todo, genera el APK y publica la web.
+
+Mientras la estructura no esté en `main`, cada uno puede ir diseñando su pantalla en papel o en Figma.
 
 ## Cómo trabajar
 
