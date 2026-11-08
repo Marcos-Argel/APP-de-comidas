@@ -1,11 +1,11 @@
 {
-    "name": "app_de_comidas",
-    "short_name": "app_de_comidas",
+    "name": "Urabá Domicilios",
+    "short_name": "Domicilios",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FAFAFA",
+    "theme_color": "#E8590C",
+    "description": "Pide domicilios de los mejores restaurantes de Urabá.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
