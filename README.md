@@ -25,6 +25,14 @@ flutter run               # en el emulador o celular Android
 
 Para revisar que todo esté instalado: `flutter doctor`.
 
+**La primera vez** que clones el repo, si no ves las carpetas `android/` y `web/`, créalas con:
+
+```bash
+flutter create --platforms android,web --org com.urabadev --project-name app_de_comidas .
+```
+
+Ese comando solo agrega lo que falta; no cambia el código de `lib/`.
+
 ## Estructura de carpetas
 
 ```
@@ -49,19 +57,24 @@ APP-de-comidas/
 │   │   └── restaurants_data.dart  # Restaurantes y menús de ejemplo
 │   ├── state/
 │   │   ├── cart_provider.dart     # Carrito (provider)
-│   │   └── favorites_provider.dart
+│   │   ├── favorites_provider.dart  # Restaurantes favoritos
+│   │   └── orders_provider.dart     # Pedidos enviados
 │   ├── widgets/                 # Piezas que usa todo el equipo
 │   │   ├── restaurant_card.dart
 │   │   ├── dish_tile.dart
 │   │   ├── app_button.dart
-│   │   └── price_text.dart
+│   │   ├── price_text.dart
+│   │   ├── food_image.dart      # Foto o emoji del plato
+│   │   └── pending_section.dart # Aviso de pantalla pendiente
 │   └── screens/                 # Una carpeta por pantalla
+│       ├── main_shell.dart      # Barra inferior: Inicio, Carrito, Perfil
 │       ├── home/                # Santiago
 │       ├── restaurant/          # Juan Parra
 │       ├── cart/                # Juan Padilla
 │       ├── checkout/            # Juan Padilla
 │       └── profile/             # Luis (pedidos y favoritos)
-├── test/
+├── test/                        # Pruebas (flutter test)
+├── .github/workflows/           # Revisión automática en cada subida
 ├── pubspec.yaml                 # Dependencias
 └── README.md
 ```
@@ -101,6 +114,8 @@ Mientras la estructura no esté en `main`, cada uno puede ir diseñando su panta
    git push origin TU_RAMA
    ```
 
+**Revisión automática:** cada vez que alguien sube a GitHub, la pestaña **Actions** compila la app y corre las pruebas. Si sale una ✗ roja en tu PR, abre el detalle para ver el error y corrígelo antes de pedir la aprobación.
+
 **Reglas:**
 - Nadie sube directo a `main`: todo pasa por Pull Request y lo aprueba el líder.
 - No subas la carpeta `build/` ni archivos con contraseñas.
@@ -114,5 +129,6 @@ Mientras la estructura no esté en `main`, cada uno puede ir diseñando su panta
 | `flutter run -d chrome` | Abre la app en el navegador |
 | `flutter run` | Abre la app en Android |
 | `flutter analyze` | Revisa errores en el código |
+| `flutter test` | Corre las pruebas |
 | `flutter build apk` | Genera el instalador de Android |
 | `flutter build web` | Genera la versión web |
