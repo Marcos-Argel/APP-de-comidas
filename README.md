@@ -1,6 +1,7 @@
-# APP de Comidas — Domicilios
+# Urabá Domicilios — APP de Comidas
 
-App de domicilios de varios restaurantes para **Android y web**, hecha con **Flutter**.
+App de domicilios de varios restaurantes de Urabá para **Android y web**, hecha con **Flutter** por **Urabá Dev**.
+Es un producto para ofrecer a negocios reales de la región, así que debe ser **seria, elegante y bien validada**.
 El usuario ve los restaurantes, entra al menú de cada uno, arma su carrito y hace el pedido.
 
 ## Funciones de la app
@@ -9,7 +10,8 @@ El usuario ve los restaurantes, entra al menú de cada uno, arma su carrito y ha
 - **Restaurante:** información del local y su menú de platos con precio.
 - **Carrito:** agregar y quitar platos, cambiar cantidades y ver el total.
 - **Pedido:** formulario con nombre, dirección y teléfono; el pedido se envía por WhatsApp al restaurante.
-- **Perfil:** mis pedidos y restaurantes favoritos.
+- **Cuenta:** iniciar sesión y registrarse con correo y contraseña (Firebase).
+- **Perfil:** datos del usuario, mis pedidos, restaurantes favoritos y cerrar sesión.
 
 ## Cómo correr el proyecto
 
@@ -72,6 +74,7 @@ APP-de-comidas/
 │       ├── restaurant/          # Juan Parra
 │       ├── cart/                # Juan Padilla
 │       ├── checkout/            # Juan Padilla
+│       ├── auth/                # Luis (login y registro)
 │       └── profile/             # Luis (pedidos y favoritos)
 ├── test/                        # Pruebas (flutter test)
 ├── .github/workflows/           # Revisión automática en cada subida
@@ -87,6 +90,7 @@ APP-de-comidas/
 | Santiago Cogollo | `santiago` | **2.** Pantalla de Inicio: lista de restaurantes, buscador y filtro (#2) | 20 nov |
 | Juan Pablo Parra | `juan-parra` | **2.** Pantalla de Restaurante y menú de platos (#3) | 20 nov |
 | Juan Pablo Padilla | `juan-padilla` | **3.** Carrito y pedido por WhatsApp (#4) | 24 nov |
+| Luis Vergara | `luis` | **2.** Login y registro con Firebase (#10) | 22 nov |
 | Luis Vergara | `luis` | **3.** Perfil: mis pedidos y favoritos (#5) | 24 nov |
 | Marcos Argel | `marcos` | **4.** Revisión final, APK de Android y web publicada (#6) | 1 dic |
 
@@ -96,6 +100,34 @@ APP-de-comidas/
 3. Al final, Marcos revisa todo, genera el APK y publica la web.
 
 Mientras la estructura no esté en `main`, cada uno puede ir diseñando su pantalla en papel o en Figma.
+
+## Diseño: la app debe verse elegante
+
+Todo el equipo cumple esta lista en su pantalla antes de abrir el PR:
+
+- [ ] Solo colores de `AppColors` y el tema de `core/theme.dart` (nada de `Colors.red` sueltos).
+- [ ] Bordes redondeados (12–16), espacios en múltiplos de 8 y sombras suaves.
+- [ ] Textos con jerarquía: títulos grandes en negrita, textos secundarios en `AppColors.muted`.
+- [ ] Usar los widgets compartidos (`AppButton`, `RestaurantCard`, `DishTile`, `PriceText`, `FoodImage`).
+- [ ] Estados vacíos y de error con ícono, mensaje claro y un botón para seguir.
+- [ ] Animaciones suaves donde ayuden (transiciones, `AnimatedSwitcher`, `Hero` en fotos).
+- [ ] Se ve bien en celular (360 px) y en web ancha (contenido centrado, máximo ~600 px).
+- [ ] Sin franjas amarillas y negras de desborde (overflow) ni errores en consola.
+
+## Calidad y validación (es una app para vender)
+
+Antes de abrir el PR, revisa que tu pantalla cumpla:
+
+- [ ] **Campos obligatorios** marcados y con mensaje de error claro en español debajo del campo.
+- [ ] **Correo** con formato válido; **teléfono** colombiano de 10 dígitos que empiece en 3; **dirección** con al menos 8 caracteres.
+- [ ] **Contraseña** de mínimo 8 caracteres con letras y números; la confirmación debe ser igual.
+- [ ] Botón con indicador de carga mientras procesa y **sin doble envío** (no se puede tocar dos veces).
+- [ ] **Carrito:** cantidad entre 1 y 20 por plato, pedido mínimo de `AppConstants.minimumOrder` y aviso antes de vaciar el carrito al cambiar de restaurante.
+- [ ] **Sin internet o error del servidor:** mensaje amable y botón "Reintentar"; la app nunca se queda en blanco ni se cierra.
+- [ ] **Confirmar** las acciones que no se pueden deshacer (vaciar carrito, cerrar sesión).
+- [ ] Precios siempre con `formatPrice` ($ 25.000) y textos sin errores de ortografía.
+- [ ] Botones y zonas táctiles de al menos 48 px y buen contraste para leer bajo el sol.
+- [ ] Probado en **Android y en web** (`flutter run` y `flutter run -d chrome`).
 
 ## Cómo trabajar
 
@@ -132,3 +164,10 @@ Mientras la estructura no esté en `main`, cada uno puede ir diseñando su panta
 | `flutter test` | Corre las pruebas |
 | `flutter build apk` | Genera el instalador de Android |
 | `flutter build web` | Genera la versión web |
+
+## Derechos de autor
+
+© 2026 **Urabá Dev** — Todos los derechos reservados.
+Autores: Marcos Daniel Argel Avila, Luis Alejandro Vergara Garcés, Santiago Cogollo Cuello, Juan Pablo Parra Sarria y Juan Pablo Padilla.
+
+El código, el diseño y los contenidos de esta app son obra del equipo y no se pueden copiar, vender ni usar sin autorización escrita de los autores. Ver [LICENSE](LICENSE).
