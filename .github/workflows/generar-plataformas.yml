@@ -1,0 +1,36 @@
+# Crea las carpetas android/ y web/ con Flutter y las sube a la rama elegida.
+# Se ejecuta a mano desde la pestaña Actions > "Generar carpetas android y web" > Run workflow.
+# Solo hace falta una vez; si las carpetas ya existen, no cambia nada.
+name: Generar carpetas android y web
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Crear carpetas que faltan
+        run: flutter create --platforms android,web --org com.urabadev --project-name app_de_comidas .
+
+      - name: Subir las carpetas nuevas
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add android web .metadata
+          if git diff --cached --quiet; then
+            echo "No hay carpetas nuevas para subir."
+          else
+            git commit -m "Agregar carpetas android y web generadas por Flutter"
+            git push
+          fi

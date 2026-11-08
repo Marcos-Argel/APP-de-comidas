@@ -25,6 +25,14 @@ flutter run               # en el emulador o celular Android
 
 Para revisar que todo esté instalado: `flutter doctor`.
 
+**La primera vez** que clones el repo, si no ves las carpetas `android/` y `web/`, créalas con:
+
+```bash
+flutter create --platforms android,web --org com.urabadev --project-name app_de_comidas .
+```
+
+Ese comando solo agrega lo que falta; no cambia el código de `lib/`.
+
 ## Estructura de carpetas
 
 ```
@@ -49,19 +57,24 @@ APP-de-comidas/
 │   │   └── restaurants_data.dart  # Restaurantes y menús de ejemplo
 │   ├── state/
 │   │   ├── cart_provider.dart     # Carrito (provider)
-│   │   └── favorites_provider.dart
+│   │   ├── favorites_provider.dart  # Restaurantes favoritos
+│   │   └── orders_provider.dart     # Pedidos enviados
 │   ├── widgets/                 # Piezas que usa todo el equipo
 │   │   ├── restaurant_card.dart
 │   │   ├── dish_tile.dart
 │   │   ├── app_button.dart
-│   │   └── price_text.dart
+│   │   ├── price_text.dart
+│   │   ├── food_image.dart      # Foto o emoji del plato
+│   │   └── pending_section.dart # Aviso de pantalla pendiente
 │   └── screens/                 # Una carpeta por pantalla
+│       ├── main_shell.dart      # Barra inferior: Inicio, Carrito, Perfil
 │       ├── home/                # Santiago
 │       ├── restaurant/          # Juan Parra
 │       ├── cart/                # Juan Padilla
 │       ├── checkout/            # Juan Padilla
-│       └── profile/             # Marcos (pedidos y favoritos)
-├── test/
+│       └── profile/             # Luis (pedidos y favoritos)
+├── test/                        # Pruebas (flutter test)
+├── .github/workflows/           # Revisión automática en cada subida
 ├── pubspec.yaml                 # Dependencias
 └── README.md
 ```
@@ -70,14 +83,19 @@ APP-de-comidas/
 
 | Integrante | Rama | Tarea | Fecha |
 | --- | --- | --- | --- |
-| Luis Vergara | `luis` | Proyecto base: `flutter create`, tema, rutas, modelos, datos de ejemplo y widgets compartidos (#1) | 13 nov |
-| Santiago Cogollo | `santiago` | Pantalla de Inicio: lista de restaurantes, buscador y filtro (#2) | 20 nov |
-| Juan Pablo Parra | `juan-parra` | Pantalla de Restaurante y menú de platos (#3) | 20 nov |
-| Juan Pablo Padilla | `juan-padilla` | Carrito y pedido por WhatsApp (#4) | 24 nov |
-| Marcos Argel | `marcos` | Perfil: mis pedidos y favoritos (#5) — líder | 24 nov |
-| Marcos Argel | `marcos` | Revisión final, APK de Android y web publicada (#6) | 1 dic |
+| Marcos Argel | `marcos` | **1.** Proyecto base: `flutter create`, tema, rutas, modelos, datos de ejemplo y widgets compartidos (#1) — líder | 11 nov |
+| Santiago Cogollo | `santiago` | **2.** Pantalla de Inicio: lista de restaurantes, buscador y filtro (#2) | 20 nov |
+| Juan Pablo Parra | `juan-parra` | **2.** Pantalla de Restaurante y menú de platos (#3) | 20 nov |
+| Juan Pablo Padilla | `juan-padilla` | **3.** Carrito y pedido por WhatsApp (#4) | 24 nov |
+| Luis Vergara | `luis` | **3.** Perfil: mis pedidos y favoritos (#5) | 24 nov |
+| Marcos Argel | `marcos` | **4.** Revisión final, APK de Android y web publicada (#6) | 1 dic |
 
-**Orden de trabajo:** Luis va primero, porque las demás pantallas usan sus modelos, datos y widgets. Mientras tanto, cada uno puede ir diseñando su pantalla.
+**Orden de trabajo:**
+1. **Marcos sube primero la estructura base** (#1). Las demás pantallas usan sus modelos, datos y widgets.
+2. Cuando la estructura entre a `main`, cada uno actualiza su rama (`git checkout SU_RAMA` y `git pull origin main`) y hace su pantalla: primero Inicio y Restaurante, después Carrito y Perfil.
+3. Al final, Marcos revisa todo, genera el APK y publica la web.
+
+Mientras la estructura no esté en `main`, cada uno puede ir diseñando su pantalla en papel o en Figma.
 
 ## Cómo trabajar
 
@@ -96,6 +114,8 @@ APP-de-comidas/
    git push origin TU_RAMA
    ```
 
+**Revisión automática:** cada vez que alguien sube a GitHub, la pestaña **Actions** compila la app y corre las pruebas. Si sale una ✗ roja en tu PR, abre el detalle para ver el error y corrígelo antes de pedir la aprobación.
+
 **Reglas:**
 - Nadie sube directo a `main`: todo pasa por Pull Request y lo aprueba el líder.
 - No subas la carpeta `build/` ni archivos con contraseñas.
@@ -109,5 +129,6 @@ APP-de-comidas/
 | `flutter run -d chrome` | Abre la app en el navegador |
 | `flutter run` | Abre la app en Android |
 | `flutter analyze` | Revisa errores en el código |
+| `flutter test` | Corre las pruebas |
 | `flutter build apk` | Genera el instalador de Android |
 | `flutter build web` | Genera la versión web |

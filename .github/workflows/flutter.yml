@@ -1,0 +1,41 @@
+# Revisa que la app compile cada vez que alguien sube cambios.
+# Si sale en rojo, abre el detalle en la pestaña Actions para ver el error.
+name: Revisar app
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Versión de Flutter
+        run: flutter --version
+
+      - name: Completar carpetas android y web si faltan
+        run: flutter create --platforms android,web --org com.urabadev --project-name app_de_comidas .
+
+      - name: Instalar dependencias
+        run: flutter pub get
+
+      - name: Revisar el código
+        run: flutter analyze --no-fatal-infos
+
+      - name: Pruebas
+        run: flutter test
+
+      - name: Compilar versión web
+        run: flutter build web --release
